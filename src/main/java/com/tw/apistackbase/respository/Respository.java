@@ -5,9 +5,10 @@ import com.tw.apistackbase.model.Employee;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class respository {
+public class Respository {
     private static Map<String, Employee> map = new HashMap<>();
 
     static {
@@ -23,4 +24,21 @@ public class respository {
     public static Employee findById(String id) {
         return map.get(id);
     }
+
+    public static void deleteById(String id) {
+        map.remove(id);
+    }
+
+    public static void addEmployee(Employee employee) {
+        String employeeId = UUID.randomUUID().toString();
+        map.put(employeeId, employee);
+    }
+
+    public static void updateById(String id, String name, int age, String gender) {
+        Employee employee = map.get(id);
+        employee.setName(name);
+        employee.setAge(age);
+        employee.setGender(gender);
+    }
+
 }

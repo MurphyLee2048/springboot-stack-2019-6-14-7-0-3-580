@@ -36,5 +36,7 @@ public class Employee {
         this.gender = gender;
     }
 
-
+    public void setId(String id) {
+        this.id = id;
+    }
 }

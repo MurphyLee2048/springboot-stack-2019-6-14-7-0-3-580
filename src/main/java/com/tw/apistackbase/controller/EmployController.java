@@ -1,10 +1,8 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Employee;
-import com.tw.apistackbase.respository.respository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.tw.apistackbase.respository.Respository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,11 +10,34 @@ import java.util.List;
 public class EmployController {
     @GetMapping("/employees")
     public List<Employee> list() {
-        return respository.findAll();
+        return Respository.findAll();
     }
 
     @GetMapping("/employees/{id}")
-    public Employee employee(@PathVariable String id) {
-        return respository.findById(id);
+    public Employee findById(@PathVariable String id) {
+        return Respository.findById(id);
     }
+
+    @DeleteMapping("/employees/{id}")
+    public void deleteById(@PathVariable String id) {
+        Respository.deleteById(id);
+    }
+
+    @PostMapping("/employees")
+    public void addEmployee(@RequestBody Employee employee) {
+        Respository.addEmployee(employee);
+    }
+
+    @PutMapping("/employees/{id}")
+    public void updateById(@PathVariable String id,
+                           @RequestBody String name,
+                           @RequestBody int age,
+                           @RequestBody String gender) {
+        Respository.updateById(id, name, age, gender);
+    }
+//
+//    @GetMapping(value = "/employees", params = "ageMin")
+//    public Employee findByAge(@RequestBody int age) {
+//        return Respository.findByAge(age);
+//    }
 }
