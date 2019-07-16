@@ -1,7 +1,7 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Employee;
-import com.tw.apistackbase.respository.EmployeeRespository;
+import com.tw.apistackbase.respository.Respository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,25 +11,26 @@ import java.util.List;
 public class EmployController {
 
     @Autowired
-    private EmployeeRespository employeeService;
+    private Respository respository;
+
     @GetMapping("/employees")
     public List<Employee> list() {
-        return employeeService.findAll();
+        return respository.findAll();
     }
 
     @GetMapping("/employees/{id}")
     public Employee findById(@PathVariable String id) {
-        return employeeService.findById(id);
+        return respository.findById(id);
     }
 
     @DeleteMapping("/employees/{id}")
     public void deleteById(@PathVariable String id) {
-        employeeService.deleteById(id);
+        respository.deleteById(id);
     }
 
     @PostMapping("/employees")
     public void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
+        respository.addEmployee(employee);
     }
 
     @PutMapping("/employees/{id}")
@@ -37,7 +38,7 @@ public class EmployController {
                            @RequestBody String name,
                            @RequestBody int age,
                            @RequestBody String gender) {
-        employeeService.updateById(id, name, age, gender);
+        respository.updateById(id, name, age, gender);
     }
 //
 //    @GetMapping(value = "/employees", params = "ageMin")
